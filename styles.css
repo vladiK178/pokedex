@@ -1,0 +1,19 @@
+.card {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+}
+
+.card img {
+  width: 120px;
+  height: 120px;
+}
+
+.card h2 {
+  text-transform: capitalize;
+  margin: 10px 0;
+}
