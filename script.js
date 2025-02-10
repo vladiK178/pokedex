@@ -1,30 +1,28 @@
-// Ein einziges Pokemon wird geladen- z.B. Pikachu
-async function loadPikachu() {
-  try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
-    const pokemon = await response.json();
-    console.log("Schau mal in die Konsole!", pokemon);
+let currentPokemon = 1; // Wir starten mit dem ersten Pokemon
 
-    // Hier zeigen wir das Pokemon an
-    showPokemon(pokemon);
-  } catch (error) {
-    console.log("Ups, da ging was schief:", error);
-  }
+// Pokemon laden
+function loadPokemon() {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${currentPokemon}`)
+    .then((response) => response.json())
+    .then((pokemon) => {
+      renderPokemon(pokemon);
+      currentPokemon++;
+    });
 }
 
-// Diese Funktion zeigt das Pokemon in unserer HTML-Seite an
-function showPokemon(pokemon) {
-  const card = document.getElementById("pokemon-card");
-  card.innerHTML = `
-        <div class="card">
-            <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+// Pokemon anzeigen
+function renderPokemon(pokemon) {
+  let pokedex = document.getElementById("pokedex");
+  pokedex.innerHTML += `
+        <div class="pokemon">
+            <img src="${pokemon.sprites.front_default}">
             <h2>${pokemon.name}</h2>
-            <p>Typ: ${pokemon.types
-              .map((type) => type.type.name)
-              .join(", ")}</p>
         </div>
     `;
 }
 
-// Starte alles, wenn die Seite geladen ist
-document.addEventListener("DOMContentLoaded", loadPikachu);
+// Start
+loadPokemon();
+
+// Mehr laden wenn Button geklickt
+document.getElementById("load-more").onclick = loadPokemon;
