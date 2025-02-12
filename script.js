@@ -1,3 +1,6 @@
+let offset = 0;
+const limit = 20;
+
 // Pokemon Typ-Farben
 const typeColors = {
   normal: "#A8A878",
@@ -103,3 +106,6 @@ async function loadPokemon() {
 
   toggleLoading(false);
 }
+
+// Initial Load beim Start
+loadPokemon();

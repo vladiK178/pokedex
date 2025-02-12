@@ -1,3 +1,86 @@
+/* Basis-Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Pokemon Karten Grid */
+#pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Pokemon Karten */
+.pokemon-card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pokemon-number {
+  color: #666;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.pokemon-image {
+  background: #f5f5f5;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+.pokemon-image img {
+  width: 120px;
+  height: 120px;
+}
+
+.pokemon-info {
+  text-align: center;
+}
+
+.pokemon-info h2 {
+  margin: 10px 0 5px;
+  text-transform: capitalize;
+  font-size: 1.2em;
+}
+
+.types {
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Load More Button */
+#load-more {
+  background: #ee1515;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1em;
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#load-more:hover {
+  background: #cc0000;
+}
+
 /* Loading Screen */
 .loading-screen {
   display: none;
