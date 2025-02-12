@@ -1,16 +1,30 @@
-let currentPokemon = 1; // Wir starten mit dem ersten Pokemon
+// Startpunkt und wie viele Pokemon wir auf einmal laden wollen
+let offset = 0;
+const limit = 20;
 
-// Pokemon laden
+// Mehrere Pokemon auf einmal laden
 function loadPokemon() {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${currentPokemon}`)
+  // API-URL mit limit und offset
+  let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
+
+  fetch(url)
     .then((response) => response.json())
-    .then((pokemon) => {
-      renderPokemon(pokemon);
-      currentPokemon++;
+    .then((data) => {
+      // Für jedes Pokemon in der Liste...
+      data.results.forEach((pokemon) => {
+        // ...laden wir die Details
+        fetch(pokemon.url)
+          .then((response) => response.json())
+          .then((pokemonData) => {
+            renderPokemon(pokemonData);
+          });
+      });
+      // Erhöhe offset für nächstes Mal
+      offset += limit;
     });
 }
 
-// Pokemon anzeigen
+// Pokemon anzeigen (bleibt erstmal gleich)
 function renderPokemon(pokemon) {
   let pokedex = document.getElementById("pokedex");
   pokedex.innerHTML += `
@@ -24,5 +38,5 @@ function renderPokemon(pokemon) {
 // Start
 loadPokemon();
 
-// Mehr laden wenn Button geklickt
+// Mehr laden Button
 document.getElementById("load-more").onclick = loadPokemon;
