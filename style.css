@@ -1,26 +1,73 @@
-#pokedex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
+.pokemon-card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
 }
 
-.pokemon {
-  border: 1px solid black;
+.pokemon-card:hover {
+  transform: translateY(-5px);
+}
+
+.pokemon-number {
+  color: #666;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.pokemon-image {
+  background: #f5f5f5;
+  border-radius: 10px;
+  text-align: center;
   padding: 10px;
-  width: 200px;
+}
+
+.pokemon-image img {
+  width: 120px;
+  height: 120px;
+}
+
+.pokemon-info {
   text-align: center;
 }
 
-.pokemon img {
-  width: 100px;
-  height: 100px;
+.pokemon-info h2 {
+  margin: 10px 0 5px;
+  text-transform: capitalize;
+  font-size: 1.2em;
 }
 
+.types {
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Der Container für alle Karten */
+#pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Styling für den Load More Button */
 #load-more {
-  display: block;
+  background: #ee1515;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1em;
   margin: 20px auto;
-  padding: 10px 20px;
+  display: block;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+#load-more:hover {
+  background: #cc0000;
 }
