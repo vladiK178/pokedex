@@ -63,20 +63,29 @@ async function showDetails(id) {
     const pokemon = await response.json();
 
     document.getElementById("overlay").innerHTML = `
-            <div class="detail-card">
-                <span class="close-button" onclick="closeDetails()">×</span>
-                <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
-                <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
-                <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
-                <h2>${pokemon.name}</h2>
-                <div class="stats">
-                    <p>HP: ${pokemon.stats[0].base_stat}</p>
-                    <p>Attack: ${pokemon.stats[1].base_stat}</p>
-                    <p>Defense: ${pokemon.stats[2].base_stat}</p>
-                    <p>Speed: ${pokemon.stats[5].base_stat}</p>
-                </div>
-            </div>
-        `;
+          <div class="detail-card">
+              <span class="close-button" onclick="closeDetails()">×</span>
+              <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
+              <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
+              <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+              <h2>${pokemon.name}</h2>
+              <div class="stats">
+                  <p>HP: ${pokemon.stats[0].base_stat}</p>
+                  <p>Attack: ${pokemon.stats[1].base_stat}</p>
+                  <p>Defense: ${pokemon.stats[2].base_stat}</p>
+                  <p>Speed: ${pokemon.stats[5].base_stat}</p>
+              </div>
+          </div>
+      `;
+
+    // Event-Listener für Klicks außerhalb der Karte
+    document.getElementById("overlay").addEventListener("click", function (e) {
+      // Wenn der Klick direkt auf dem Overlay war (nicht auf der Karte)
+      if (e.target === this) {
+        closeDetails();
+      }
+    });
+
     document.getElementById("overlay").style.display = "flex";
   } catch (error) {
     console.error("Error:", error);
