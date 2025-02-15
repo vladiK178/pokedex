@@ -34,18 +34,18 @@ function renderPokemon(pokemon) {
   let id = "#" + pokemon.id.toString().padStart(3, "0");
 
   pokedex.innerHTML += `
-        <div class="pokemon-card" style="background: linear-gradient(to bottom, ${typeColors[mainType]}33, white)" 
-             onclick="showDetails(${pokemon.id})">
-            <div class="pokemon-number">${id}</div>
-            <div class="pokemon-image">
-                <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
-            </div>
-            <div class="pokemon-info">
-                <h2>${pokemon.name}</h2>
-                <span class="types">${types}</span>
-            </div>
-        </div>
-    `;
+      <div class="pokemon-card" style="background: ${typeColors[mainType]}88" 
+           onclick="showDetails(${pokemon.id})">
+          <div class="pokemon-number">${id}</div>
+          <div class="pokemon-image" style="background: rgba(255, 255, 255, 0.5)">
+              <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+          </div>
+          <div class="pokemon-info">
+              <h2>${pokemon.name}</h2>
+              <span class="types">${types}</span>
+          </div>
+      </div>
+  `;
 }
 
 // Loading-Screen ein-/ausblenden
