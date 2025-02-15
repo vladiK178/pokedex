@@ -58,12 +58,14 @@ function toggleLoading(show) {
 async function showDetails(id) {
   currentPokemonId = id;
   toggleLoading(true);
+
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const pokemon = await response.json();
+    const mainType = pokemon.types[0].type.name;
 
     document.getElementById("overlay").innerHTML = `
-          <div class="detail-card">
+          <div class="detail-card" style="background: ${typeColors[mainType]}CC">
               <span class="close-button" onclick="closeDetails()">×</span>
               <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
               <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
@@ -80,7 +82,6 @@ async function showDetails(id) {
 
     // Event-Listener für Klicks außerhalb der Karte
     document.getElementById("overlay").addEventListener("click", function (e) {
-      // Wenn der Klick direkt auf dem Overlay war (nicht auf der Karte)
       if (e.target === this) {
         closeDetails();
       }
