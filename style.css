@@ -96,6 +96,44 @@ header {
   font-size: 0.9em;
 }
 
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(238, 21, 21, 0.9);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.nav-button:hover {
+  background: rgba(204, 0, 0, 0.9);
+}
+
+.nav-button.prev {
+  left: -50px;
+}
+
+.nav-button.next {
+  right: -50px;
+}
+
+/* Anpassung der Detail-Card für die Navigation */
+.detail-card {
+  position: relative;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  margin: 0 60px; /* Platz für die Navigationspfeile */
+}
+
 /* Load More Button */
 #load-more {
   background: #ee1515;
