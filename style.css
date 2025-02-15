@@ -212,16 +212,6 @@ header {
   z-index: 1000;
 }
 
-.detail-card {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  position: relative;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-}
-
 .close-button {
   position: absolute;
   top: 10px;
