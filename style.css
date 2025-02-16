@@ -5,12 +5,12 @@
 }
 
 body {
-  font-family: open-sans, sans-serif;
-  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  background-color: #faf7f2; /* Warmes Beige als Hintergrund */
 }
 
 header {
-  background: white;
+  background: white; /* Zurück zu weiß, passt besser zum warmen Hintergrund */
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -34,6 +34,7 @@ header {
 .title h1 {
   margin: 0;
   font-size: 24px;
+  color: #333; /* Dunkler Text für besseren Kontrast */
 }
 
 .search-container {
@@ -46,6 +47,7 @@ header {
   border-radius: 20px;
   width: 250px;
   font-size: 16px;
+  background: white; /* Weißer Hintergrund für die Suche */
 }
 
 #search:focus {
