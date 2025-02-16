@@ -18,6 +18,12 @@ header {
   z-index: 100;
 }
 
+.logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
 .search-container {
   display: flex;
   justify-content: flex-end;
@@ -136,7 +142,7 @@ header {
 
 /* Für das Bild in der Detail-Ansicht */
 .detail-card img {
-  width: 200px; 
+  width: 200px;
   height: 200px;
 }
 
