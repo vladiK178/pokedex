@@ -77,8 +77,8 @@ header {
 }
 
 .pokemon-image img {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
 }
 
 .pokemon-info {
@@ -132,6 +132,12 @@ header {
   width: 90%;
   text-align: center;
   margin: 0 60px; /* Platz für die Navigationspfeile */
+}
+
+/* Für das Bild in der Detail-Ansicht */
+.detail-card img {
+  width: 200px; 
+  height: 200px;
 }
 
 /* Load More Button */
