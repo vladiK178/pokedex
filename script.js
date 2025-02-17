@@ -38,7 +38,7 @@ function renderPokemon(pokemon) {
            onclick="showDetails(${pokemon.id})">
           <div class="pokemon-number">${id}</div>
           <div class="pokemon-image" style="background: rgba(255, 255, 255, 0.5)">
-              <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
           </div>
           <div class="pokemon-info">
               <h2>${pokemon.name}</h2>
@@ -69,7 +69,7 @@ async function showDetails(id) {
         <span class="close-button" onclick="closeDetails()">×</span>
         <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
         <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
-        <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
         <h2>${pokemon.name}</h2>
         <div class="stats">
             <p>HP: ${pokemon.stats[0].base_stat}</p>

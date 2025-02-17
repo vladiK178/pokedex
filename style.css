@@ -96,6 +96,7 @@ header {
 .pokemon-image img {
   width: 150px;
   height: 150px;
+  object-fit: contain; /* Behält das Seitenverhältnis bei */
 }
 
 .pokemon-info {
@@ -159,6 +160,7 @@ header {
 .detail-card img {
   width: 200px;
   height: 200px;
+  object-fit: contain;
 }
 
 /* Load More Button */
