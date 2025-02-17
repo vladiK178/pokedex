@@ -117,26 +117,30 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(238, 21, 21, 0.9);
-  color: white;
-  border: none;
-  padding: 15px 20px;
+  background: white;
+  color: black;
+  border: 2px solid black;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   font-size: 20px;
-  border-radius: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background 0.2s;
 }
 
 .nav-button:hover {
-  background: rgba(204, 0, 0, 0.9);
+  background: #f0f0f0;
 }
 
 .nav-button.prev {
-  left: -50px;
+  left: 20px; /* Statt -50px, jetzt innerhalb der Karte */
 }
 
 .nav-button.next {
-  right: -50px;
+  right: 20px; /* Statt -50px, jetzt innerhalb der Karte */
 }
 
 /* Anpassung der Detail-Card für die Navigation */
