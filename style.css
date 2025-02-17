@@ -5,12 +5,12 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #faf7f2; /* Warmes Beige als Hintergrund */
+  font-family: open-sans, sans-serif;
+  background-color: #ffd700; /* Pokemon yellow */
 }
 
 header {
-  background: white; /* Zurück zu weiß, passt besser zum warmen Hintergrund */
+  background: #ffeb3b; /* Slightly lighter yellow for the header */
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
