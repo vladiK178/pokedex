@@ -1,3 +1,21 @@
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff5d4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd900;
+  border-radius: 6px;
+  border: 3px solid #fff5d4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffcd00;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,35 +24,34 @@
 
 body {
   font-family: open-sans, sans-serif;
-  background-color: #ffd700; /* Pokemon yellow */
+  background-color: #fff5d4;
 }
 
 header {
-  background: #ffeb3b; /* Slightly lighter yellow for the header */
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #ffd900;
+  padding: 20px 40px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }
 
 .title {
   margin-right: auto;
-  margin-left: 10px;
 }
 
 .title h1 {
-  margin: 0;
-  font-size: 24px;
-  color: #333; /* Dunkler Text für besseren Kontrast */
+  font-size: 32px;
+  color: #2c2c2c;
+  font-weight: bold;
 }
 
 .search-container {
@@ -42,42 +59,45 @@ header {
 }
 
 #search {
-  padding: 10px 15px;
-  border: 2px solid #ddd;
-  border-radius: 20px;
-  width: 250px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  width: 300px;
   font-size: 16px;
-  background: white; /* Weißer Hintergrund für die Suche */
+  background: #fff5d4;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 #search:focus {
   outline: none;
-  border-color: #ee1515;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: white;
 }
 
-/* Pokemon Karten Grid */
 #pokedex {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  gap: 30px;
   justify-content: center;
 }
 
-/* Pokemon Karten */
 .pokemon-card {
   background: white;
-  border-radius: 15px;
-  padding: 15px;
-  width: 200px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .pokemon-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .pokemon-number {
@@ -87,7 +107,7 @@ header {
 }
 
 .pokemon-image {
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   text-align: center;
   padding: 10px;
@@ -96,7 +116,7 @@ header {
 .pokemon-image img {
   width: 150px;
   height: 150px;
-  object-fit: contain; /* Behält das Seitenverhältnis bei */
+  object-fit: contain;
 }
 
 .pokemon-info {
@@ -118,70 +138,83 @@ header {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: white;
-  color: black;
-  border: 2px solid black;
-  width: 40px;
-  height: 40px;
+  background: #fff5d4;
+  color: #2c2c2c;
+  border: none;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button:hover {
-  background: #f0f0f0;
+  background: #ffd900;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .nav-button.prev {
-  left: 20px; /* Statt -50px, jetzt innerhalb der Karte */
+  left: 20px;
 }
 
 .nav-button.next {
-  right: 20px; /* Statt -50px, jetzt innerhalb der Karte */
+  right: 20px;
 }
 
-/* Anpassung der Detail-Card für die Navigation */
 .detail-card {
   position: relative;
   background: white;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 400px;
+  padding: 40px;
+  border-radius: 30px;
+  max-width: 500px;
   width: 90%;
   text-align: center;
-  margin: 0 60px; /* Platz für die Navigationspfeile */
+  margin: 0 60px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 217, 0, 0.3);
 }
 
-/* Für das Bild in der Detail-Ansicht */
+.detail-card h2 {
+  font-size: 2em;
+  color: #2c2c2c;
+  text-transform: capitalize;
+  margin: 15px 0;
+}
+
 .detail-card img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
+  margin: 10px 0;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
 }
 
-/* Load More Button */
 #load-more {
-  background: #ee1515;
-  color: white;
+  background: #ffd900;
+  color: #2c2c2c;
   border: none;
-  padding: 12px 30px;
+  padding: 15px 40px;
   border-radius: 25px;
-  font-size: 1em;
-  margin: 20px auto;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 30px auto;
   display: block;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 #load-more:hover {
-  background: #cc0000;
+  background: #ffcd00;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Loading Screen */
 .loading-screen {
   display: none;
   position: fixed;
@@ -227,7 +260,6 @@ header {
   }
 }
 
-/* Detail-Ansicht */
 .overlay {
   display: none;
   position: fixed;
@@ -235,7 +267,8 @@ header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -243,15 +276,39 @@ header {
 
 .close-button {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
   cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff5d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: #ffd900;
+  transform: rotate(90deg);
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 25px;
+  padding: 20px;
+  background: #fff5d4;
+  border-radius: 15px;
+}
+
+.stats p {
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-weight: 500;
 }
