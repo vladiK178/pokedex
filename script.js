@@ -3,7 +3,6 @@ const limit = 20;
 let currentPokemonId = 1;
 let isLoading = false;
 
-// Farben für die Pokemon Typen
 const typeColors = {
   normal: "#A8A878",
   fire: "#F08030",
@@ -122,7 +121,6 @@ async function loadPokemon() {
   toggleLoading(false);
 }
 
-// Suche mit Verzögerung
 let searchTimeout;
 document.getElementById("search").oninput = function (e) {
   let searchTerm = e.target.value.toLowerCase();
@@ -138,7 +136,7 @@ document.getElementById("search").oninput = function (e) {
         const pokemon = await response.json();
         if (pokemon.name.includes(searchTerm)) {
           renderPokemon(pokemon);
-          // Maximale Suchergebnisse
+
           if (document.querySelectorAll(".pokemon-card").length >= 10) break;
         }
       } catch (error) {
@@ -148,8 +146,6 @@ document.getElementById("search").oninput = function (e) {
   }, 300);
 };
 
-// Mehr Pokemon laden
 document.getElementById("load-more").onclick = loadPokemon;
 
-// Start
 loadPokemon();
