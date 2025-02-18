@@ -1,10 +1,9 @@
-// Startpunkt und wie viele Pokemon wir auf einmal laden wollen
 let offset = 0;
 const limit = 20;
 let currentPokemonId = 1;
 let isLoading = false;
 
-// Pokemon Typ-Farben
+// Farben für die Pokemon Typen
 const typeColors = {
   normal: "#A8A878",
   fire: "#F08030",
@@ -26,36 +25,33 @@ const typeColors = {
   fairy: "#EE99AC",
 };
 
-// Pokemon in der Übersicht rendern
 function renderPokemon(pokemon) {
   let pokedex = document.getElementById("pokedex");
   let mainType = pokemon.types[0].type.name;
   let types = pokemon.types.map((type) => type.type.name).join(" / ");
-  let id = "#" + pokemon.id.toString().padStart(3, "0");
+  let pokemonId = pokemon.id.toString().padStart(3, "0");
 
   pokedex.innerHTML += `
-      <div class="pokemon-card" style="background: ${typeColors[mainType]}88" 
-           onclick="showDetails(${pokemon.id})">
-          <div class="pokemon-number">${id}</div>
-          <div class="pokemon-image" style="background: rgba(255, 255, 255, 0.5)">
-              <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
-          </div>
-          <div class="pokemon-info">
-              <h2>${pokemon.name}</h2>
-              <span class="types">${types}</span>
-          </div>
-      </div>
+    <div class="pokemon-card" style="background: ${typeColors[mainType]}88" onclick="showDetails(${pokemon.id})">
+        <div class="pokemon-number">#${pokemonId}</div>
+        <div class="pokemon-image">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
+        </div>
+        <div class="pokemon-info">
+            <h2>${pokemon.name}</h2>
+            <span class="types">${types}</span>
+        </div>
+    </div>
   `;
 }
 
-// Loading-Screen ein-/ausblenden
 function toggleLoading(show) {
   isLoading = show;
   document.getElementById("loading").style.display = show ? "flex" : "none";
 }
 
-// Detail-Ansicht anzeigen
 async function showDetails(id) {
+  if (isLoading) return;
   currentPokemonId = id;
   toggleLoading(true);
 
@@ -65,58 +61,52 @@ async function showDetails(id) {
     const mainType = pokemon.types[0].type.name;
 
     document.getElementById("overlay").innerHTML = `
-    <div class="detail-card" style="background: ${typeColors[mainType]}CC">
-        <span class="close-button" onclick="closeDetails()">×</span>
-        <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
-        <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
-        <h2>${pokemon.name}</h2>
-        <div class="stats">
-            <p>HP: ${pokemon.stats[0].base_stat}</p>
-            <p>Attack: ${pokemon.stats[1].base_stat}</p>
-            <p>Defense: ${pokemon.stats[2].base_stat}</p>
-            <p>Speed: ${pokemon.stats[5].base_stat}</p>
-        </div>
-    </div>
-`;
+      <div class="detail-card" style="background: ${typeColors[mainType]}CC">
+          <span class="close-button" onclick="closeDetails()">×</span>
+          <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
+          <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
+          <h2>${pokemon.name}</h2>
+          <div class="stats">
+              <p>HP: ${pokemon.stats[0].base_stat}</p>
+              <p>Attack: ${pokemon.stats[1].base_stat}</p>
+              <p>Defense: ${pokemon.stats[2].base_stat}</p>
+              <p>Speed: ${pokemon.stats[5].base_stat}</p>
+          </div>
+      </div>
+    `;
 
-    // Event-Listener für Klicks außerhalb der Karte
-    document.getElementById("overlay").addEventListener("click", function (e) {
-      if (e.target === this) {
-        closeDetails();
-      }
-    });
+    document.getElementById("overlay").onclick = function (e) {
+      if (e.target === this) closeDetails();
+    };
 
     document.getElementById("overlay").style.display = "flex";
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Fehler beim Laden:", error);
   }
+
   toggleLoading(false);
 }
 
-// Detail-Ansicht schließen
 function closeDetails() {
   document.getElementById("overlay").style.display = "none";
 }
 
-// Zwischen Pokemon navigieren
 async function navigatePokemon(direction) {
   const newId = currentPokemonId + direction;
   if (newId > 0 && newId <= 898) {
-    // 898 ist die höchste Pokemon-ID
     await showDetails(newId);
   }
 }
 
-// Pokemon laden
 async function loadPokemon() {
   if (isLoading) return;
   toggleLoading(true);
 
-  let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
-
   try {
-    const response = await fetch(url);
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+    );
     const data = await response.json();
 
     for (let pokemon of data.results) {
@@ -126,44 +116,40 @@ async function loadPokemon() {
     }
     offset += limit;
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Fehler beim Laden:", error);
   }
 
   toggleLoading(false);
 }
 
-// Suchfunktion
-let searchTimeout = null;
-document.getElementById("search").addEventListener("input", (e) => {
-  const searchTerm = e.target.value.toLowerCase();
-
-  // Mindestens 3 Buchstaben
+// Suche mit Verzögerung
+let searchTimeout;
+document.getElementById("search").oninput = function (e) {
+  let searchTerm = e.target.value.toLowerCase();
   if (searchTerm.length < 3) return;
 
-  // Debounce die Suche
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(async () => {
-    const pokedex = document.getElementById("pokedex");
-    pokedex.innerHTML = ""; // Leere aktuelle Anzeige
+    document.getElementById("pokedex").innerHTML = "";
 
-    // Suche in den ersten 898 Pokemon
     for (let i = 1; i <= 898; i++) {
       try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
         const pokemon = await response.json();
         if (pokemon.name.includes(searchTerm)) {
           renderPokemon(pokemon);
+          // Maximale Suchergebnisse
           if (document.querySelectorAll(".pokemon-card").length >= 10) break;
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Fehler bei der Suche:", error);
       }
     }
   }, 300);
-});
+};
 
-// Event Listener für "Mehr laden" Button
-document.getElementById("load-more").addEventListener("click", loadPokemon);
+// Mehr Pokemon laden
+document.getElementById("load-more").onclick = loadPokemon;
 
-// Initial Load beim Start
+// Start
 loadPokemon();
