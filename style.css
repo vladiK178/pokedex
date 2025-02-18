@@ -312,3 +312,99 @@ header {
   background: #ffd900;
   transform: rotate(90deg);
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+    justify-content: space-between;
+  }
+
+  .title h1 {
+    font-size: 28px;
+  }
+
+  #search {
+    width: 250px;
+  }
+}
+
+@media (max-width: 585px) {
+  header {
+    padding: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title {
+    margin-right: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .search-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #search {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .title h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
+
+  .logo {
+    width: 35px;
+    height: 35px;
+  }
+
+  #search {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .detail-card {
+    margin: 0 10px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title h1 {
+    font-size: 18px;
+  }
+
+  #search {
+    padding: 6px 10px;
+  }
+
+  .pokemon-card {
+    padding: 15px;
+  }
+
+  .pokemon-image img {
+    width: 120px;
+    height: 120px;
+  }
+}
