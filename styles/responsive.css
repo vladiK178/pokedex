@@ -46,6 +46,31 @@
   .title h1 {
     font-size: 20px;
   }
+
+  .detail-card {
+    padding: 30px 20px;
+    margin: 0 40px;
+    position: relative;
+  }
+
+  .detail-card img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .nav-button {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .nav-button.prev {
+    left: 10px;
+  }
+
+  .nav-button.next {
+    right: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -64,8 +89,66 @@
   }
 
   .detail-card {
-    margin: 0 10px;
+    margin: 0 30px;
+    padding: 25px 15px;
+  }
+
+  .detail-card img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .close-button {
+    top: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    font-size: 24px;
+  }
+
+  .nav-button {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 385px) {
+  .detail-card {
+    margin: 0 25px;
+    padding: 35px 15px 15px;
+  }
+
+  .detail-card img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .stats {
+    gap: 10px;
     padding: 15px;
+  }
+
+  .stats p {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .close-button {
+    top: 2px;
+    right: 2px;
+  }
+
+  .nav-button {
+    top: calc(50% - 35px);
+  }
+
+  .nav-button.prev {
+    left: 5px;
+  }
+
+  .nav-button.next {
+    right: 5px;
   }
 }
 
@@ -90,5 +173,25 @@
   .pokemon-image img {
     width: 120px;
     height: 120px;
+  }
+
+  .detail-card {
+    margin: 0 20px;
+    padding: 30px 10px 10px;
+  }
+
+  .detail-card img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .detail-card h2 {
+    font-size: 1.5em;
+  }
+
+  .nav-button {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
   }
 }

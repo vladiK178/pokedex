@@ -39,7 +39,7 @@ async function showDetails(id) {
     overlay.innerHTML = `
         <div class="detail-card" style="background: ${typeColors[mainType]}CC">
             <span class="close-button" onclick="closeDetails()">×</span>
-            <button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>
+            ${id > 1 ? `<button class="nav-button prev" onclick="navigatePokemon(-1)">←</button>` : ''}
             <button class="nav-button next" onclick="navigatePokemon(1)">→</button>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png" alt="${pokemon.name}">
             <h2>${pokemon.name}</h2>
