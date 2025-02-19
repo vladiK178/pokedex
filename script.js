@@ -70,6 +70,18 @@ document.getElementById("search").addEventListener("input", function (e) {
   }, 300);
 });
 
+function resetPokedex() {
+  document.getElementById("search").value = "";
+  document.getElementById("pokedex").innerHTML = "";
+
+  offset = 0;
+
+  loadPokemon();
+}
+
+document.querySelector(".logo").addEventListener("click", resetPokedex);
+document.querySelector(".title").addEventListener("click", resetPokedex);
+
 document.getElementById("load-more").addEventListener("click", loadPokemon);
 
 loadPokemon();
