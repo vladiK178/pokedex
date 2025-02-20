@@ -9,46 +9,57 @@ document.getElementById("search").addEventListener("input", function (e) {
   }
 
   clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(async function () {
-    isSearchActive = true;
-    let pokedex = document.getElementById("pokedex");
-    pokedex.innerHTML = "";
-
-    document.getElementById("load-more").style.display = "none";
-    document.getElementById("back-button").style.display = "block";
-
-    toggleLoading(true);
-
-    try {
-      let matchingPokemon = [];
-
-      for (let i = 0; i < allPokemon.length; i++) {
-        if (allPokemon[i].name.includes(searchTerm)) {
-          matchingPokemon.push(allPokemon[i]);
-
-          if (matchingPokemon.length >= 10) {
-            break;
-          }
-        }
-      }
-
-      if (matchingPokemon.length === 0) {
-        pokedex.innerHTML = `
-          <div style="text-align: center; width: 100%; padding: 20px;">
-              <h2>Kein Pokémon gefunden mit "${searchTerm}"</h2>
-          </div>
-        `;
-      } else {
-        for (let pokemon of matchingPokemon) {
-          let response = await fetch(pokemon.url);
-          let pokemonData = await response.json();
-          renderPokemon(pokemonData);
-        }
-      }
-    } catch (error) {
-      console.log("Fehler beim Suchen:", error);
-    }
-
-    toggleLoading(false);
+  searchTimeout = setTimeout(function () {
+    startSearch(searchTerm);
   }, 300);
 });
+
+function startSearch(searchTerm) {
+  isSearchActive = true;
+  document.getElementById("pokedex").innerHTML = "";
+  document.getElementById("load-more").style.display = "none";
+  document.getElementById("back-button").style.display = "block";
+  toggleLoading(true);
+
+  let matchingPokemon = findMatchingPokemon(searchTerm);
+  loadSearchResults(matchingPokemon, searchTerm);
+}
+
+function findMatchingPokemon(searchTerm) {
+  let results = [];
+
+  for (let i = 0; i < allPokemon.length; i++) {
+    if (allPokemon[i].name.includes(searchTerm)) {
+      results.push(allPokemon[i]);
+      if (results.length >= 10) {
+        break;
+      }
+    }
+  }
+
+  return results;
+}
+
+async function loadSearchResults(matchingPokemon, searchTerm) {
+  let pokedex = document.getElementById("pokedex");
+
+  if (matchingPokemon.length === 0) {
+    pokedex.innerHTML = `<div style="text-align: center; padding: 20px;">
+        <h2>Kein Pokémon gefunden mit "${searchTerm}"</h2>
+      </div>`;
+    toggleLoading(false);
+    return;
+  }
+
+  for (let i = 0; i < matchingPokemon.length; i++) {
+    try {
+      let response = await fetch(matchingPokemon[i].url);
+      let pokemonData = await response.json();
+      renderPokemon(pokemonData);
+    } catch (error) {
+      console.log("Fehler beim Laden eines Pokémon:", error);
+    }
+  }
+
+  toggleLoading(false);
+}
