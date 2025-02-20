@@ -3,6 +3,8 @@ const limit = 20;
 let currentPokemonId = 1;
 let isLoading = false;
 let isSearchActive = false;
+let searchTimeout = null;
+let allPokemon = [];
 
 function toggleLoading(show) {
   isLoading = show;
@@ -17,6 +19,16 @@ async function navigatePokemon(direction) {
   let newId = currentPokemonId + direction;
   if (newId > 0 && newId <= 898) {
     await showDetails(newId);
+  }
+}
+
+async function loadInitialPokemonList() {
+  try {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=898");
+    const data = await response.json();
+    allPokemon = data.results;
+  } catch (error) {
+    console.log("Fehler beim Laden der Pokemon-Liste:", error);
   }
 }
 
@@ -39,3 +51,4 @@ function setEventListeners() {
 
 setEventListeners();
 loadPokemon();
+loadInitialPokemonList();

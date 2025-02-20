@@ -1,4 +1,3 @@
-let searchTimeout = null;
 document.getElementById("search").addEventListener("input", function (e) {
   let searchTerm = e.target.value.toLowerCase();
 
@@ -21,23 +20,22 @@ document.getElementById("search").addEventListener("input", function (e) {
     toggleLoading(true);
 
     try {
-      let foundPokemon = 0;
-      for (let i = 1; i <= 898; i++) {
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-        let pokemon = await response.json();
-        if (pokemon.name.includes(searchTerm)) {
-          renderPokemon(pokemon);
-          foundPokemon++;
-          if (foundPokemon >= 10) break;
-        }
+      const filteredPokemon = allPokemon
+        .filter((pokemon) => pokemon.name.includes(searchTerm))
+        .slice(0, 10);
+
+      for (let pokemon of filteredPokemon) {
+        const response = await fetch(pokemon.url);
+        const pokemonData = await response.json();
+        renderPokemon(pokemonData);
       }
 
-      if (foundPokemon === 0) {
+      if (filteredPokemon.length === 0) {
         pokedex.innerHTML = `
-                    <div style="text-align: center; width: 100%; padding: 20px;">
-                        <h2>No Pokémon found with "${searchTerm}"</h2>
-                    </div>
-                `;
+                  <div style="text-align: center; width: 100%; padding: 20px;">
+                      <h2>No Pokémon found with "${searchTerm}"</h2>
+                  </div>
+              `;
       }
     } catch (error) {
       console.log("Fehler beim Suchen:", error);
