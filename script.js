@@ -30,9 +30,12 @@ function resetPokedex() {
   loadPokemon();
 }
 
-document.getElementById("back-button").addEventListener("click", resetPokedex);
-document.querySelector(".logo").addEventListener("click", resetPokedex);
-document.querySelector(".title").addEventListener("click", resetPokedex);
-document.getElementById("load-more").addEventListener("click", loadPokemon);
+function setEventListeners() {
+  document.getElementById("back-button").addEventListener("click", resetPokedex);
+  document.querySelector(".logo").addEventListener("click", resetPokedex);
+  document.querySelector(".title").addEventListener("click", resetPokedex);
+  document.getElementById("load-more").addEventListener("click", loadPokemon);
+}
 
+setEventListeners();
 loadPokemon();
