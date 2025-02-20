@@ -20,22 +20,30 @@ document.getElementById("search").addEventListener("input", function (e) {
     toggleLoading(true);
 
     try {
-      const filteredPokemon = allPokemon
-        .filter((pokemon) => pokemon.name.includes(searchTerm))
-        .slice(0, 10);
+      let matchingPokemon = [];
 
-      for (let pokemon of filteredPokemon) {
-        const response = await fetch(pokemon.url);
-        const pokemonData = await response.json();
-        renderPokemon(pokemonData);
+      for (let i = 0; i < allPokemon.length; i++) {
+        if (allPokemon[i].name.includes(searchTerm)) {
+          matchingPokemon.push(allPokemon[i]);
+
+          if (matchingPokemon.length >= 10) {
+            break;
+          }
+        }
       }
 
-      if (filteredPokemon.length === 0) {
+      if (matchingPokemon.length === 0) {
         pokedex.innerHTML = `
-                  <div style="text-align: center; width: 100%; padding: 20px;">
-                      <h2>No Pokémon found with "${searchTerm}"</h2>
-                  </div>
-              `;
+          <div style="text-align: center; width: 100%; padding: 20px;">
+              <h2>Kein Pokémon gefunden mit "${searchTerm}"</h2>
+          </div>
+        `;
+      } else {
+        for (let pokemon of matchingPokemon) {
+          let response = await fetch(pokemon.url);
+          let pokemonData = await response.json();
+          renderPokemon(pokemonData);
+        }
       }
     } catch (error) {
       console.log("Fehler beim Suchen:", error);
