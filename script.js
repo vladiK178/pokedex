@@ -4,7 +4,7 @@ let currentPokemonId = 1;
 let isLoading = false;
 let isSearchActive = false;
 let searchTimeout = null;
-let allPokemon = [];
+
 
 function toggleLoading(show) {
   isLoading = show;
